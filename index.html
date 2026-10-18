@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Mama Ngozi’s Kitchen</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,600;12..96,800&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#f5f7f3;--surface:#fff;--ink:#14231a;--mute:#56655b;--line:#dce5dd;--green:#0f4a2f;--green-ink:#f3fff8;--accent:#d33a1b;--accent-ink:#fff;--gold:#f4b400;--tile:#e6f0e2;color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#0b1710;--surface:#122219;--ink:#eaf3ec;--mute:#9bb0a2;--line:#1f3427;--green:#0a2f1e;--green-ink:#eaf3ec;--accent:#ff6a45;--accent-ink:#1a0803;--gold:#f4b400;--tile:#1b3326;color-scheme:dark}}
+:root[data-theme="dark"]{--bg:#0b1710;--surface:#122219;--ink:#eaf3ec;--mute:#9bb0a2;--line:#1f3427;--green:#0a2f1e;--green-ink:#eaf3ec;--accent:#ff6a45;--accent-ink:#1a0803;--gold:#f4b400;--tile:#1b3326;color-scheme:dark}
+html{scroll-padding-top:env(safe-area-inset-top,0px);scroll-behavior:smooth}
+*,*::before,*::after{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:"Bricolage Grotesque",system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;font-size:16px;line-height:1.45;padding-bottom:120px;max-width:560px;margin-inline:auto}
+button,input,textarea{font:inherit;color:inherit}
+.hero{background:var(--green);color:var(--green-ink);padding:28px 20px 30px;border-radius:0 0 28px 28px}
+.hero h1{margin:0;font-size:clamp(2.3rem,11vw,3.2rem);line-height:.98;font-weight:800;letter-spacing:-.02em}
+.hero p{margin:12px 0 0;font-size:1.05rem;max-width:30ch;opacity:.92}
+.info{display:flex;gap:10px;margin-top:20px;flex-wrap:wrap}
+.info span{background:rgba(255,255,255,.12);padding:7px 12px;border-radius:999px;font-size:.9rem}
+.sticker{display:inline-block;margin-top:18px;background:var(--gold);color:#2b2100;font-weight:800;padding:8px 14px;border-radius:10px;transform:rotate(-2deg);font-size:.95rem}
+.tabs{display:flex;gap:8px;overflow-x:auto;padding:18px 20px 6px;scrollbar-width:none}
+.tabs::-webkit-scrollbar{display:none}
+.tab{flex:none;border:1.5px solid var(--line);background:var(--surface);padding:8px 16px;border-radius:999px;cursor:pointer;font-weight:600}
+.tab[aria-pressed="true"]{background:var(--ink);color:var(--bg);border-color:var(--ink)}
+.menu{padding:6px 20px 0}
+.row{display:grid;grid-template-columns:76px 1fr auto;gap:14px;align-items:center;padding:16px 0;border-bottom:1px solid var(--line)}
+.row:last-child{border-bottom:0}
+.emo{position:relative;overflow:hidden;width:76px;height:76px;border-radius:18px;background:var(--tile);display:grid;place-items:center;font-size:36px}
+.emo img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.row h3{margin:0;font-size:1.05rem;font-weight:600;line-height:1.2}
+.row small{display:block;color:var(--mute);font-size:.85rem;margin:2px 0 4px}
+.price{font-weight:800}
+.add{background:var(--accent);color:var(--accent-ink);border:0;border-radius:12px;padding:10px 16px;font-weight:800;cursor:pointer;min-width:72px}
+.step{display:flex;align-items:center;gap:2px;background:var(--tile);border-radius:12px;padding:3px}
+.step button{width:36px;height:36px;border:0;border-radius:9px;background:var(--surface);font-size:1.2rem;font-weight:800;cursor:pointer}
+.step b{min-width:26px;text-align:center}
+.checkout{margin:26px 20px 0;padding:20px;background:var(--surface);border:1.5px solid var(--line);border-radius:20px}
+.checkout h2{margin:0 0 12px;font-size:1.35rem}
+.line{display:flex;justify-content:space-between;gap:12px;padding:6px 0;font-size:.95rem}
+.total{border-top:2px dashed var(--line);margin-top:8px;padding-top:12px;font-size:1.15rem;font-weight:800}
+.empty{color:var(--mute)}
+label{display:block;font-weight:600;font-size:.9rem;margin:14px 0 6px}
+input,textarea{width:100%;padding:12px 14px;border-radius:12px;border:1.5px solid var(--line);background:var(--bg)}
+input:focus-visible,textarea:focus-visible,button:focus-visible,a:focus-visible{outline:3px solid var(--gold);outline-offset:2px}
+.send{display:block;margin-top:18px;text-align:center;text-decoration:none;background:#1f9d55;color:#fff;font-weight:800;padding:15px;border-radius:14px;font-size:1.05rem}
+.send[aria-disabled="true"]{opacity:.45;pointer-events:none}
+.foot{text-align:center;color:var(--mute);font-size:.85rem;padding:26px 20px 0}
+.bar{position:fixed;left:0;right:0;bottom:0;max-width:560px;margin-inline:auto;padding:12px 16px calc(12px + env(safe-area-inset-bottom,0px));transform:translateY(120%);transition:transform .25s ease;z-index:5}
+.bar.show{transform:none}
+.bar button{width:100%;display:flex;justify-content:space-between;align-items:center;border:0;background:var(--ink);color:var(--bg);border-radius:16px;padding:15px 18px;font-weight:800;font-size:1.02rem;cursor:pointer;box-shadow:0 8px 24px rgba(0,0,0,.25)}
+@media (prefers-reduced-motion:reduce){.bar{transition:none}html{scroll-behavior:auto}}
+</style>
+</head>
+<body>
+<!-- EDIT THESE: business name, WhatsApp number (234 + number without the first 0), and the menu below -->
+<header class="hero">
+  <h1 id="name"></h1>
+  <p id="tag"></p>
+  <div class="info"><span>🛵 Delivery across Lagos</span><span>⏱️ Ready in 30 to 45 minutes</span></div>
+  <div class="sticker">Tap, order, done. No DM stress.</div>
+</header>
+<nav class="tabs" id="tabs" aria-label="Menu categories"></nav>
+<main class="menu" id="menu"></main>
+
+<section class="checkout" id="checkout">
+  <h2>Your order</h2>
+  <div id="lines"></div>
+  <label for="cname">Your name</label>
+  <input id="cname" autocomplete="name" placeholder="Ada">
+  <label for="caddr">Delivery address</label>
+  <textarea id="caddr" rows="2" autocomplete="street-address" placeholder="House number, street, area"></textarea>
+  <a class="send" id="send" href="#" target="_blank" rel="noopener" aria-disabled="true">Send order on WhatsApp</a>
+</section>
+<p class="foot">Sample design. Your business name, products and prices go here.</p>
+
+<div class="bar" id="bar"><button id="go" type="button"><span id="count"></span><span id="sum"></span></button></div>
+
+<script>
+const CONFIG={name:"Mama Ngozi’s Kitchen",tagline:"Hot Nigerian meals, cooked fresh and brought to your door.",whatsapp:"2348012345678"};
+// Photos: add img:"jollof.jpg" (a photo saved next to this file) or a full https link to any item. The emoji shows if there is no photo.
+const ITEMS=[
+{id:1,n:"Jollof Rice + Chicken",d:"Smoky party-style jollof",p:3500,c:"Rice",e:"🍛",img:"jollof.jpg"},
+{id:3,n:"Ofada Rice + Stew",d:"Spicy ayamase, assorted meat",p:3000,c:"Rice",e:"🌶️",img:"ofada-rice.jpg"},
+{id:4,n:"Beef Suya",d:"Yaji spice, onions, tomato",p:2500,c:"Grills",e:"🍢",img:"suya.jpg"},
+{id:5,n:"Grilled Fish",d:"Whole tilapia, pepper sauce",p:5000,c:"Grills",e:"🐟",img:"grilled-fish.jpg"},
+{id:6,n:"Small Chops Pack",d:"Samosa, spring roll, wings",p:4500,c:"Snacks",e:"🥟",img:"small-chops.jpg"},
+{id:7,n:"Puff Puff (10 pieces)",d:"Soft, sweet, still warm",p:1500,c:"Snacks",e:"🍩",img:"puff-puff.jpg"},
+{id:8,n:"Meat Pie",d:"Flaky, with minced beef",p:1000,c:"Snacks",e:"🥧",img:"meat-pie.jpg"},
+{id:9,n:"Chapman",d:"Chilled, with cucumber",p:1500,c:"Drinks",e:"🍹",img:"chapman.jpg"},
+{id:10,n:"Zobo",d:"Hibiscus, ginger, pineapple",p:1000,c:"Drinks",e:"🥤",img:"zobo.jpg"}
+];
+const $=s=>document.querySelector(s);
+const money=n=>"₦"+n.toLocaleString("en-NG");
+const cats=["All",...new Set(ITEMS.map(i=>i.c))];
+let cat="All";const cart={};
+$("#name").textContent=CONFIG.name;$("#tag").textContent=CONFIG.tagline;document.title=CONFIG.name;
+
+function tabs(){$("#tabs").innerHTML=cats.map(c=>`<button class="tab" type="button" data-cat="${c}" aria-pressed="${c===cat}">${c}</button>`).join("")}
+function menu(){
+  $("#menu").innerHTML=ITEMS.filter(i=>cat==="All"||i.c===cat).map(i=>{
+    const q=cart[i.id]||0;
+    const ctl=q?`<div class="step"><button type="button" data-dec="${i.id}" aria-label="Remove one ${i.n}">−</button><b>${q}</b><button type="button" data-inc="${i.id}" aria-label="Add one ${i.n}">+</button></div>`:`<button class="add" type="button" data-inc="${i.id}">Add</button>`;
+    return `<div class="row"><div class="emo" aria-hidden="true">${i.e}${i.img?`<img src="${i.img}" alt="" loading="lazy" onerror="this.remove()">`:""}</div><div><h3>${i.n}</h3><small>${i.d}</small><span class="price">${money(i.p)}</span></div>${ctl}</div>`}).join("");
+}
+function totals(){let n=0,t=0;ITEMS.forEach(i=>{const q=cart[i.id]||0;n+=q;t+=q*i.p});return{n,t}}
+function summary(){
+  const {n,t}=totals();
+  const chosen=ITEMS.filter(i=>cart[i.id]);
+  $("#lines").innerHTML=chosen.length?chosen.map(i=>`<div class="line"><span>${cart[i.id]} × ${i.n}</span><span>${money(cart[i.id]*i.p)}</span></div>`).join("")+`<div class="line total"><span>Total</span><span>${money(t)}</span></div>`:`<p class="empty">Nothing here yet. Add something from the menu.</p>`;
+  $("#count").textContent=n+(n===1?" item in your order":" items in your order");
+  $("#sum").textContent=money(t);
+  $("#bar").classList.toggle("show",n>0);
+  const send=$("#send");
+  if(!n){send.setAttribute("aria-disabled","true");send.href="#";return}
+  const name=$("#cname").value.trim(),addr=$("#caddr").value.trim();
+  const msg=`Hello ${CONFIG.name}, I would like to order:\n`+chosen.map(i=>`• ${cart[i.id]} × ${i.n} (${money(cart[i.id]*i.p)})`).join("\n")+`\n\nTotal: ${money(t)}\nName: ${name}\nAddress: ${addr}`;
+  send.href=`https://wa.me/${CONFIG.whatsapp}?text=${encodeURIComponent(msg)}`;
+  send.setAttribute("aria-disabled","false");
+}
+function refresh(){menu();summary()}
+document.addEventListener("click",e=>{
+  const t=e.target.closest("button");if(!t)return;
+  if(t.dataset.cat){cat=t.dataset.cat;tabs();menu();return}
+  if(t.dataset.inc){cart[t.dataset.inc]=(cart[t.dataset.inc]||0)+1;refresh();return}
+  if(t.dataset.dec){const k=t.dataset.dec;cart[k]=Math.max(0,(cart[k]||0)-1);if(!cart[k])delete cart[k];refresh();return}
+  if(t.id==="go")$("#checkout").scrollIntoView({behavior:"smooth"});
+});
+$("#cname").addEventListener("input",summary);$("#caddr").addEventListener("input",summary);
+tabs();refresh();
+</script>
+</body>
+</html>
